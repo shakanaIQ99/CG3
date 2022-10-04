@@ -125,8 +125,8 @@ void GameScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(cmdList);
 
-	sprite1->Draw();
-	sprite2->Draw();
+	//sprite1->Draw();
+	//sprite2->Draw();
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
