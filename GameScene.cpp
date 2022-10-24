@@ -43,11 +43,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
 	// 3Dオブジェクト生成
 	object3d = Object3d::Create();
-	object3d->Update();
+	object3d->Update(false,false);
+	ybill = false;
+	bill = false;
+
 }
 
 void GameScene::Update()
 {
+
+	ybill = false;
+	bill = false;
+
 	// オブジェクト移動
 	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))
 	{
@@ -76,13 +83,22 @@ void GameScene::Update()
 	// カメラ移動
 	if (input->PushKey(DIK_W) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_A))
 	{
-		if (input->PushKey(DIK_W)) { Object3d::CameraMoveVector({ 0.0f,+1.0f,0.0f }); }
-		else if (input->PushKey(DIK_S)) { Object3d::CameraMoveVector({ 0.0f,-1.0f,0.0f }); }
-		if (input->PushKey(DIK_D)) { Object3d::CameraMoveVector({ +1.0f,0.0f,0.0f }); }
-		else if (input->PushKey(DIK_A)) { Object3d::CameraMoveVector({ -1.0f,0.0f,0.0f }); }
+		if (input->PushKey(DIK_W))		{ Object3d::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f }); }
+		else if (input->PushKey(DIK_S)) { Object3d::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f }); }
+		if (input->PushKey(DIK_D))		{ Object3d::CameraMoveEyeVector({ +1.0f,0.0f,0.0f }); }
+		else if (input->PushKey(DIK_A)) { Object3d::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); }
 	}
 
-	object3d->Update();
+	if (input->PushKey(DIK_0))
+	{
+		bill = true;
+	}
+	else if(input->PushKey(DIK_1))
+	{
+		ybill = true;
+	}
+
+	object3d->Update(ybill,bill);
 }
 
 void GameScene::Draw()

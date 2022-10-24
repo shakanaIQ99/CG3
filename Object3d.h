@@ -43,6 +43,9 @@ private: // 定数
 	static const int planeCount = division * 2 + division * 2;		// 面の数
 	static const int vertexCount = 4;	// 頂点数
 	static const int indexCount = 3 * 2;
+	
+	static XMMATRIX matBillboard;
+	static XMMATRIX matBillboardY;
 
 public: // 静的メンバ関数
 	/// <summary>
@@ -99,6 +102,8 @@ public: // 静的メンバ関数
 	/// </summary>
 	/// <param name="move">移動量</param>
 	static void CameraMoveVector(XMFLOAT3 move);
+
+	static void CameraMoveEyeVector(XMFLOAT3 move);
 
 private: // 静的メンバ変数
 	// デバイス
@@ -181,7 +186,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 毎フレーム処理
 	/// </summary>
-	void Update();
+	void Update(bool ybill,bool bill);
 
 	/// <summary>
 	/// 描画
