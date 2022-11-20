@@ -11,6 +11,7 @@ GameScene::~GameScene()
 {
 	delete spriteBG;
 	delete particleMan;
+	delete obj;
 
 	delete sprite1;
 	delete sprite2;
@@ -42,6 +43,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	// 背景スプライト生成
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
 	// 3Dオブジェクト生成
+	obj = Object3d::Create();
+	obj->Update(false, false);
+
 	particleMan = ParticleManager::Create();
 	particleMan->Update(false,false);
 	ybill = false;
@@ -106,7 +110,7 @@ void GameScene::Update()
 	{
 		ybill = true;
 	}
-
+	obj->Update(ybill, bill);
 	particleMan->Update(ybill,bill);
 }
 
@@ -119,7 +123,7 @@ void GameScene::Draw()
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(cmdList);
 	// 背景スプライト描画
-	spriteBG->Draw();
+	//spriteBG->Draw();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -130,7 +134,18 @@ void GameScene::Draw()
 	// 深度バッファクリア
 	dxCommon->ClearDepthBuffer();
 #pragma endregion
+	// 3Dオブジェクト描画前処理
+	Object3d::PreDraw(cmdList);
 
+	// 3Dオブクジェクトの描画
+	obj->Draw();
+
+	/// <summary>
+	/// ここに3Dオブジェクトの描画処理を追加できる
+	/// </summary>
+
+	// 3Dオブジェクト描画後処理
+	Object3d::PostDraw();
 #pragma region 3Dオブジェクト描画
 	// 3Dオブジェクト描画前処理
 	ParticleManager::PreDraw(cmdList);
