@@ -2,7 +2,7 @@
 
 VSOutput main(float4 pos : POSITION)
 {
-	VSOutput output; // ピクセルシェーダーに渡す値
+	VSOutput output; // 繝斐け繧ｻ繝ｫ繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｫ貂｡縺吝､
 	output.pos = pos;
 	return output;
 }

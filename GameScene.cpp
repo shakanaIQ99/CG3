@@ -96,10 +96,26 @@ void GameScene::Update()
 	// カメラ移動
 	if (input->PushKey(DIK_W) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_A))
 	{
-		if (input->PushKey(DIK_W))		{ ParticleManager::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f }); }
-		else if (input->PushKey(DIK_S)) { ParticleManager::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f }); }
-		if (input->PushKey(DIK_D))		{ ParticleManager::CameraMoveEyeVector({ +1.0f,0.0f,0.0f }); }
-		else if (input->PushKey(DIK_A)) { ParticleManager::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); }
+		if (input->PushKey(DIK_W))
+		{ 
+			ParticleManager::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f });
+			Object3d::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f });
+		}
+		else if (input->PushKey(DIK_S)) 
+		{ 
+			ParticleManager::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f }); 
+			Object3d::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f });
+		}
+		if (input->PushKey(DIK_D))		
+		{ 
+			ParticleManager::CameraMoveEyeVector({ +1.0f,0.0f,0.0f });
+			Object3d::CameraMoveEyeVector({ +1.0f,0.0f,0.0f });
+		}
+		else if (input->PushKey(DIK_A)) 
+		{ 
+			ParticleManager::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); 
+			Object3d::CameraMoveEyeVector({ -1.0f,0.0f,0.0f });
+		}
 	}
 
 	if (input->PushKey(DIK_0))
