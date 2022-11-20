@@ -110,8 +110,8 @@ void DirectXCommon::PostDraw() {
 	commandList_->ResourceBarrier(1, &barrier);
 
 	// 命令のクローズ
-	commandList_->Close();
-
+	result= commandList_->Close();
+	assert(SUCCEEDED(result));
 	// コマンドリストの実行
 	ID3D12CommandList* cmdLists[] = {commandList_.Get()}; // コマンドリストの配列
 	commandQueue_->ExecuteCommandLists(1, cmdLists);
