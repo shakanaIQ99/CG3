@@ -307,6 +307,8 @@ void Object3d::InitializeGraphicsPipeline()
 	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 0～255指定のRGBA
 	gpipeline.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
+	gpipeline.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+
 	// デスクリプタレンジ
 	CD3DX12_DESCRIPTOR_RANGE descRangeSRV;
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
@@ -346,7 +348,7 @@ void Object3d::LoadTexture()
 	ScratchImage scratchImg{};
 
 	// WICテクスチャのロード
-	result = LoadFromWICFile( L"Resources/texture.png", WIC_FLAGS_NONE, &metadata, scratchImg);
+	result = LoadFromWICFile( L"Resources/kusa.png", WIC_FLAGS_NONE, &metadata, scratchImg);
 	assert(SUCCEEDED(result));
 
 	ScratchImage mipChain{};
@@ -432,7 +434,7 @@ void Object3d::CreateModel()
 
 	for (int i = 0; i < vertexCount; i++)
 	{
-		const float rnd_width = 5.0f;
+		const float rnd_width = 3.0f;
 		vertices[i].pos.x = (float)rand() / RAND_MAX * rnd_width - rnd_width / 2.0f;
 		vertices[i].pos.y = 0.0f;
 		vertices[i].pos.z = (float)rand() / RAND_MAX * rnd_width - rnd_width / 2.0f;
@@ -603,7 +605,7 @@ void Object3d::Update(bool ybill, bool bill)
 	//constMap->color = color;
 	//constMap->mat = matWorld * matView * matProjection;	// 行列の合成
 	constMap->mat = matView * matProjection;
-	constMap->matBillboard = matBillboard;
+	constMap->matBillboard = matBillboardY;
 	constBuff->Unmap(0, nullptr);
 }
 

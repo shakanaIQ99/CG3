@@ -10,7 +10,7 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	delete spriteBG;
-//	delete particleMan;
+	delete particleMan;
 	delete obj;
 
 	delete sprite1;
@@ -46,32 +46,32 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	obj = Object3d::Create();
 	obj->Update(false, false);
 
-//	particleMan = ParticleManager::Create();
-	//particleMan->Update(false,false);
+	particleMan = ParticleManager::Create();
+	particleMan->Update(false,false);
 	ybill = false;
 	bill = false;
 
-	//for (int i= 0 ; i < 100; i++)
-	//{
-	//	const float rnd_pos = 10.0f;
-	//	XMFLOAT3 pos{};
-	//	pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-	//	pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-	//	pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+	for (int i= 0 ; i < 100; i++)
+	{
+		const float rnd_pos = 10.0f;
+		XMFLOAT3 pos{};
+		pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
-	//	const float rnd_vel = 0.1f;
-	//	XMFLOAT3 vel{};
-	//	vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
-	//	vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
-	//	vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
+		const float rnd_vel = 0.1f;
+		XMFLOAT3 vel{};
+		vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
+		vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
+		vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 
-	//	XMFLOAT3 acc{};
-	//	const float rnd_acc=0.001f;
-	//	acc.y = -(float)rand() / RAND_MAX * rnd_acc;
+		XMFLOAT3 acc{};
+		const float rnd_acc=0.001f;
+		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
-	//	//particleMan->Add(300, pos, vel, acc,1.0f,0.0f);
+		particleMan->Add(300, pos, vel, acc,1.0f,0.0f);
 
-	//}
+	}
 
 }
 
@@ -98,22 +98,22 @@ void GameScene::Update()
 	{
 		if (input->PushKey(DIK_W))
 		{ 
-		//	ParticleManager::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f });
+			ParticleManager::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f });
 			Object3d::CameraMoveEyeVector({ 0.0f,+1.0f,0.0f });
 		}
 		else if (input->PushKey(DIK_S)) 
 		{ 
-		//	ParticleManager::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f }); 
+			ParticleManager::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f }); 
 			Object3d::CameraMoveEyeVector({ 0.0f,-1.0f,0.0f });
 		}
 		if (input->PushKey(DIK_D))		
 		{ 
-			//ParticleManager::CameraMoveEyeVector({ +1.0f,0.0f,0.0f });
+			ParticleManager::CameraMoveEyeVector({ +1.0f,0.0f,0.0f });
 			Object3d::CameraMoveEyeVector({ +1.0f,0.0f,0.0f });
 		}
 		else if (input->PushKey(DIK_A)) 
 		{ 
-			//ParticleManager::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); 
+			ParticleManager::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); 
 			Object3d::CameraMoveEyeVector({ -1.0f,0.0f,0.0f });
 		}
 	}
@@ -127,7 +127,7 @@ void GameScene::Update()
 		ybill = true;
 	}
 	obj->Update(ybill, bill);
-//	particleMan->Update(ybill,bill);
+	particleMan->Update(ybill,bill);
 }
 
 void GameScene::Draw()
@@ -164,17 +164,17 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 #pragma region 3Dオブジェクト描画
 	// 3Dオブジェクト描画前処理
-	//ParticleManager::PreDraw(cmdList);
+	ParticleManager::PreDraw(cmdList);
 
 	// 3Dオブクジェクトの描画
-	//particleMan->Draw();
+	particleMan->Draw();
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 
 	// 3Dオブジェクト描画後処理
-	//ParticleManager::PostDraw();
+	ParticleManager::PostDraw();
 #pragma endregion
 
 #pragma region 前景スプライト描画
